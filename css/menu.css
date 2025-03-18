@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100;1,300&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: 0.2s linear;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: #f0f4f8; /* Light background color */
+}
+
+.heading {
+  margin: 2rem 0;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 4em;
+  font-weight: bold;
+  color: #333; /* Dark text color */
+}
+
+.packages1 {
+  background-color: #f0f4f8; /* Light background for packages */
+  padding: 7rem 0;
+}
+
+.packages1 .box-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  position: relative;
+  margin-top: 5rem;
+}
+
+.packages1 .box-container .box {
+  text-align: center;
+  background: #ffffff; /* White background for boxes */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1.2rem;
+  position: relative;
+  padding: 10px;
+  min-height: 50rem;
+  transition: background 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.packages1 .box-container .box:hover {
+  background: #06f5f5; /* Darker background on hover */
+  color: white; /* White text on hover */
+}
+
+.packages1 .box-container .box:hover .content > * {
+  color: #fff; /* Change content color on hover */
+}
+
+.packages1 .box-container .box .btn,
+.out-of-stock {
+  position: absolute;
+  bottom: 15px; /* Distance from the bottom */
+  left: 50%; /* Center the button */
+  transform: translateX(-50%);
+}
+
+.price {
+  position: absolute;
+  bottom: 70px; /* Distance from the bottom */
+  left: 50%; /* Center the price */
+  transform: translateX(-50%);
+}
+
+.Stock {
+  position: absolute;
+  bottom: 3px; /* Distance from the bottom */
+  right: 0%; /* Align to the right */
+  transform: translateX(-50%);
+  color: red;
+  text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.7);
+  font-size: smaller;
+}
+
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  border: 0.2rem solid #05e9e9; /* Updated border color */
+  color: #333; /* Dark text color */
+  cursor: pointer;
+  background: none;
+  font-size: 1.7rem;
+  padding: 1rem 3rem;
+  border-radius: 40px;
+  transition: background 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.btn:hover {
+  background: rgba(238, 238, 238, 0.8); /* Light background on hover */
+}
+
+.packages1 .box-container .box:hover .btn:hover {
+  color: #01b7ee; /* Change button text color on hover */
+}
+
+.packages1 .box-container .box .image {
+  height: 25rem;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.packages1 .box-container .box .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.packages1 .box-container .box .content {
+  padding: 1.5rem;
+  font-size: small;
+}
+
+.packages1 .box-container .box .content h3 {
+  font-size: 2rem;
+  color: #333; /* Dark text color */
+}
+
+.packages1 .box-container .box .content .price {
+  font-size: 1.5rem;
+  color: #04bdeb; /* Price color */
+}
+
+.packages1 .box-container .box .content .out-of-stock {
+  font-size: 1.5rem;
+  color: red;
+  text-shadow: 0 0 2px rgba(255, 0, 0, 0.7);
+}
+
+.desc {
+  text-align: justify;
+}
+
+@media screen and (max-width: 1200px) {
+  .packages1 .box-container {
+    grid-template-columns: repeat(3, 1fr); /* Three columns on screens around 1200px */
+  }
+
+  .packages1 .box-container .box {
+    margin-bottom: 2rem; /* Space between boxes */
+    width: 300px; /* Minimum width for the card */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .packages1 .box-container {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
+  }
+
+  .packages1 .box-container .box {
+    margin-bottom: 2rem; /* Space between boxes */
+    min-width: 300px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .packages1 .box-container {
+    grid-template-columns: 1fr; /* One column on screens up to 450px */
+  }
+
+  .packages1 .box-container .box {
+    margin-bottom: 2rem; /* Space between boxes */
+    min-width: 300px;
+  }
+}

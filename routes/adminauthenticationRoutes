@@ -1,0 +1,73 @@
+const express = require('express');
+const session = require('express-session');
+const router = express.Router();
+require('dotenv').config();
+router.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 30 * 60 * 1000 
+  }
+}));
+
+const adminCredentials = {
+  username: 'admin',
+  password: 'admin@123'
+};
+
+router.get('/adminlogin', (req, res) => {
+  res.render('admin/adminlogin', { message: req.flash('error') });
+});
+
+router.post('/adminlogin', (req, res) => {
+  const { adminUsername, adminPassword } = req.body;
+
+  if (adminUsername === adminCredentials.username && adminPassword === adminCredentials.password) {
+    req.session.isAdminLoggedIn = true;
+    req.session.cookie.maxAge = 30 * 60 * 1000;
+    return res.redirect('/admindashboard');
+  } else {
+    req.flash('error', 'Invalid admin credentials');
+    return res.redirect('/adminlogin');
+  }
+});
+
+const isAdminLoggedIn = (req, res, next) => {
+  if (req.session.isAdminLoggedIn) {
+    return next();
+  } else {
+    return res.redirect('/adminlogin');
+  }
+};
+
+const categories = require('../models/categoryModel');
+const products = require('../models/productModel');
+const users = require('../models/User');
+const orders = require('../models/Order');
+
+router.get('/admindashboard', async (req, res) => {
+  try {
+    const Categories = await categories.countDocuments();
+    const Products = await products.countDocuments();
+    const Users = await users.countDocuments();
+    const Orders = await orders.countDocuments();
+    res.render('admin/admindashboard', {
+      Categories,
+      Products,
+      Users,
+      Orders
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+});
+
+router.get('/adminlogout', (req, res) => {
+  req.session.isAdminLoggedIn = false; 
+  res.redirect('/adminlogin'); 
+});
+
+module.exports = router;
